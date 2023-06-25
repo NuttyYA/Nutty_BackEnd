@@ -13,6 +13,8 @@ public class SignUpRequest {
     private String mbti;
     @NotBlank(message = "email은 필수 입력 값입니다.")
     private String email;
+    @NotBlank(message = "필명은 필수 입력 값입니다.")
+    private String userName;
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
     private String password;
 
@@ -20,5 +22,9 @@ public class SignUpRequest {
         User user = new User();
         user.initData(this);
         return user;
+    }
+
+    public void initPassword(String encode) {
+        this.password = encode;
     }
 }

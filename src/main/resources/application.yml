@@ -1,3 +1,7 @@
+jwt:
+  secret:
+    key: 7J2064W467Kg7J207IWY7Lqg7ZSE7IiY6rCV7IOd67aE65Ok7ZmU7J207YyF7ZWY7IS47JqU7KKL7J2A7ZqM7IKs7JeQ66qo65GQ7Leo7JeF7ISx6rO17ZWY7Iuk6rGw652866
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

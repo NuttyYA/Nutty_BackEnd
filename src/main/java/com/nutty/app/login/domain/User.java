@@ -18,10 +18,12 @@ public class User {
     private String email;
     private String password;
     private String mbti;
+    private String userName;
 
     public void initData(SignUpRequest signUpRequest) {
         this.email = signUpRequest.getEmail();
         this.password = signUpRequest.getPassword();
         this.mbti = signUpRequest.getMbti();
+        this.userName = signUpRequest.getUserName();
     }
 }

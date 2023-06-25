@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,12 +22,16 @@ import java.util.List;
 public class SignUpController {
 
     private final SignUpService signUpService;
+    private final PasswordEncoder passwordEncoder;
+
     @Operation(summary = "회원가입 API", description = "회원가입 API", tags = { "SignUpController" })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "OK")
     })
     @PostMapping("/v1/api/signup")
     public String signup(@Valid @RequestBody SignUpRequest request){
+        String encode = passwordEncoder.encode(request.getPassword());
+        request.initPassword(encode);
         signUpService.signUp(request);
         return "회원가입 완료";
     }
