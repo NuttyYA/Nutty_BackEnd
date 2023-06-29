@@ -1,6 +1,7 @@
 package com.nutty.app.login.controller;
 
 import com.nutty.app.login.domain.User;
+import com.nutty.app.login.request.DuplicateRequest;
 import com.nutty.app.login.request.SignUpRequest;
 import com.nutty.app.login.service.SignUpService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,6 +35,21 @@ public class SignUpController {
         request.initPassword(encode);
         signUpService.signUp(request);
         return "회원가입 완료";
+    }
+
+    @Operation(summary = "닉네임중복 확인 API", description = "닉네임 중복 확인 API", tags = { "SignUpController" })
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK")
+    })
+    @GetMapping("/v1/api/signup/duplicate")
+    public String signupDuplicate(@Valid @RequestBody DuplicateRequest request){
+        Boolean duplicated = signUpService.duplicateCheck(request);
+        if(duplicated){
+            //중복되었음 가입 불가
+            return "1";
+        }
+        //중복되지 않았음 가입 가능
+        return "0";
     }
 
     @Operation(summary = "회원가입 목록 API", description = "회원가입 확인 전용 API", tags = { "SignUpController" })
