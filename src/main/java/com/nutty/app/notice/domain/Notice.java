@@ -11,6 +11,7 @@ import javax.persistence.*;
 public class Notice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "notice_id")
     private Long id;
 
     private String createDate;

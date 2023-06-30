@@ -13,7 +13,7 @@ public class UserInfoResponse {
         UserInfoResponse response = new UserInfoResponse();
         response.userName = userDetails.getAccount().getUserName();
         response.mbti = userDetails.getAccount().getMbti();
-        response.userName = userDetails.getAccount().getEmail();
+        response.email = userDetails.getAccount().getEmail();
         return response;
     }
 }

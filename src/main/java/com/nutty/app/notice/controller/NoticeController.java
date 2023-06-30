@@ -2,6 +2,7 @@ package com.nutty.app.notice.controller;
 
 import com.nutty.app.login.jwt.UserDetailsImpl;
 import com.nutty.app.notice.request.CreateNoticeRequest;
+import com.nutty.app.notice.response.NoticeDetailResponse;
 import com.nutty.app.notice.response.NoticeMainPageResponse;
 import com.nutty.app.notice.service.NoticeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,10 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -30,6 +28,15 @@ public class NoticeController {
     @GetMapping ("/v1/api/notice/main")
     public List<NoticeMainPageResponse> mainPage(){
         return noticeService.getMainPage();
+    }
+
+    @Operation(summary = "게시글 조회 API", description = "게시글 조회 API", tags = { "NoticeController" })
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK")
+    })
+    @GetMapping ("/v1/api/notice/{noticeId}")
+    public NoticeDetailResponse noticeDetail(@PathVariable("noticeId") Long noticeId){
+        return noticeService.getNoticeDetail(noticeId);
     }
 
 

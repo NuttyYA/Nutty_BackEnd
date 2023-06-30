@@ -4,6 +4,7 @@ import com.nutty.app.login.domain.User;
 import com.nutty.app.notice.domain.Notice;
 import com.nutty.app.notice.repository.NoticeRepository;
 import com.nutty.app.notice.request.CreateNoticeRequest;
+import com.nutty.app.notice.response.NoticeDetailResponse;
 import com.nutty.app.notice.response.NoticeMainPageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,9 @@ public class NoticeService {
     public void createNotice(CreateNoticeRequest request, User account) {
         Notice notice = Notice.toEntity(request,account);
         noticeRepository.insertNotice(notice);
+    }
+
+    public NoticeDetailResponse getNoticeDetail(Long noticeId) {
+        return noticeRepository.findNoticeDetail(noticeId);
     }
 }
