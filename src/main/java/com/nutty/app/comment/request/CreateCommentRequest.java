@@ -6,4 +6,5 @@ import lombok.Getter;
 public class CreateCommentRequest {
     private Long noticeId;
     private String comment;
+    private String createDate;
 }

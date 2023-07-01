@@ -22,7 +22,7 @@ public class CommentService {
     @Transactional
     public void createComment(CreateCommentRequest request, User account) {
         Notice notice = noticeRepository.findById(request.getNoticeId()).orElse(null);
-        Comment comment = Comment.toEntity(request.getComment(), account,notice);
+        Comment comment = Comment.toEntity(request, account,notice);
         commentRepository.createComment(comment);
     }
 }

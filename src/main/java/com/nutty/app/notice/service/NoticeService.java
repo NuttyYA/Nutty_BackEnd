@@ -1,5 +1,8 @@
 package com.nutty.app.notice.service;
 
+import com.nutty.app.comment.domain.Comment;
+import com.nutty.app.comment.repository.CommentRepository;
+import com.nutty.app.comment.response.CommentsResponse;
 import com.nutty.app.login.domain.User;
 import com.nutty.app.notice.domain.Notice;
 import com.nutty.app.notice.repository.NoticeRepository;
@@ -18,6 +21,7 @@ import java.util.stream.Collectors;
 public class NoticeService {
 
     private final NoticeRepository noticeRepository;
+    private final CommentRepository commentRepository;
     public List<NoticeMainPageResponse> getMainPage() {
         List<Notice> noticeList = noticeRepository.findMainList();
         List<NoticeMainPageResponse> collect = noticeList.stream()
@@ -32,6 +36,9 @@ public class NoticeService {
     }
 
     public NoticeDetailResponse getNoticeDetail(Long noticeId) {
-        return noticeRepository.findNoticeDetail(noticeId);
+        NoticeDetailResponse noticeDetail = noticeRepository.findNoticeDetail(noticeId);
+        List<Comment> comments = commentRepository.selectCommentList(noticeId);
+        noticeDetail.initComments(comments);
+        return noticeDetail;
     }
 }

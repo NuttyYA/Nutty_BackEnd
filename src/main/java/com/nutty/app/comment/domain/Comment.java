@@ -16,6 +16,7 @@ public class Comment {
     private Long id;
 
     private String comment;
+    private String createDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -25,14 +26,15 @@ public class Comment {
     @JoinColumn(name = "notice_id")
     private Notice notice;
 
-    public static Comment toEntity(String comment, User account, Notice notice) {
+    public static Comment toEntity(CreateCommentRequest comment, User account, Notice notice) {
         Comment response = new Comment();
-        response.initData(comment,account,notice);
+        response.initData(comment.getComment(),comment.getCreateDate(), account,notice);
         return response;
     }
 
-    private void initData(String comment, User account, Notice notice) {
+    private void initData(String comment,String createDate, User account, Notice notice) {
         this.comment = comment;
+        this.createDate = createDate;
         this.user = account;
         this.notice = notice;
     }
